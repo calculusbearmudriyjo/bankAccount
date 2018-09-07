@@ -23,7 +23,7 @@ libraryDependencies ++= Seq(
 
 lazy val app = (project in file("app")).
   settings(
-    mainClass in assembly := Some("com.imbetgames.slot.Main"),
+    mainClass in assembly := Some("ru.bankAccount.BankApp"),
     // more settings here ...
   )
 
