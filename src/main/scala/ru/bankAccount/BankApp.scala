@@ -25,7 +25,7 @@ object BankApp extends TwitterServer with Logging {
   val listAccountEndpoint: Endpoint[List[Account]] =
     get("account") {
       for {
-        r <- accountService.getAccount()
+        r <- accountService.getAccountList()
       } yield Ok(r)
     }
 

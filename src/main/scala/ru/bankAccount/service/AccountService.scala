@@ -12,8 +12,8 @@ final case class FillAccountException(message: String) extends Exception
 class AccountService {
   var accounts: Map[String, Ref[Account]] = Map()
 
-  def getAccount(): Future[List[Account]] = Future{accounts.values.map(_.single.get).toList}
   def getAccount(name: String): Future[Option[Account]] = Future{accounts.get(name).map(_.single.get)}
+  def getAccountList(): Future[List[Account]] = Future{accounts.values.map(_.single.get).toList}
 
   def createAccount(name: String): Future[Either[Exception,Account]] = Future {
     if(accounts.get(name).isEmpty) {
@@ -33,7 +33,7 @@ class AccountService {
           case Some(t) => {
             var res: Either[Exception,Account] = Left(TransferException("cannot transfer money from :" + f.single().name + ", to :" + t.single().name))
             atomic { implicit trx =>
-              if(f().amount - amount > 0) {
+              if(f().amount - amount >= 0) {
                 f() = Account(f().name, f().amount - amount)
                 t() = Account(t().name, t().amount + amount)
                 res = Right(f())
