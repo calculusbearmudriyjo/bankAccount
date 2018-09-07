@@ -17,6 +17,8 @@ libraryDependencies ++= Seq(
   "ch.qos.logback"  %  "logback-classic"     % "1.2.3",
   "com.typesafe" % "config" % "1.3.2",
   "org.scala-stm" %% "scala-stm" % "0.8",
+  "org.scalactic" %% "scalactic" % "3.0.5",
+  "org.scalatest" %% "scalatest" % "3.0.5" % "test",
 )
 
 lazy val app = (project in file("app")).
