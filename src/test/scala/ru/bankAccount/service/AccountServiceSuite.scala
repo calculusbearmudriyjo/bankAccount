@@ -127,7 +127,7 @@ class AccountServiceSuite extends FunSuite with BeforeAndAfter{
     service.fillAccount(accountName2, 1000)
 
     val listTrx1 = (0 to 1000).map(x => Future{service.transferAmount(accountName, accountName2, 1)})
-    val listTrx2 = (0 to 1000).map(x => Future{service.transferAmount(accountName, accountName2, 1)})
+    val listTrx2 = (0 to 1000).map(x => Future{service.transferAmount(accountName2, accountName, 1)})
     val totalTrx = listTrx1 ++ listTrx2
 
     Await.result(Future.sequence(totalTrx), 10 seconds)
